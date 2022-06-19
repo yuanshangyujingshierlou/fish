@@ -1,0 +1,25 @@
+{
+	"game": {
+		"name": "fish",
+		"appid": "650157160",
+		"cid": 0
+	},
+	"needExecNative": true,
+	"configs": [
+		{
+			"appid": "650157160",
+			"services": [
+				{
+					"service_id": "235",
+					"enable": false,
+					"params": {
+						"appid": "650157160",
+						"store_id": "",
+						"store_id_platform": "",
+						"plugin_version": "1.3.7_2.2.1"
+					}
+				}
+			]
+		}
+	]
+}
