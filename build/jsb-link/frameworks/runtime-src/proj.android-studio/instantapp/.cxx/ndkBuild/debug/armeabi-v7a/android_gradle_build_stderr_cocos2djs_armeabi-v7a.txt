@@ -1,0 +1,56 @@
+In file included from D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/AudioResampler.cpp:28:
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/audio_utils/include/audio_utils/primitives.h:742:33: warning: implicit conversion from 'unsigned long' to 'float' changes value from 4294967295 to 4294967296 [-Wimplicit-const-int-float-conversion]
+    static const float limpos = 0xffffffffUL / (float)(1 << 28);
+                                ^~~~~~~~~~~~ ~
+1 warning generated.
+In file included from D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/tinysndfile.cpp:20:
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/audio_utils/include/audio_utils/primitives.h:742:33: warning: implicit conversion from 'unsigned long' to 'float' changes value from 4294967295 to 4294967296 [-Wimplicit-const-int-float-conversion]
+    static const float limpos = 0xffffffffUL / (float)(1 << 28);
+                                ^~~~~~~~~~~~ ~
+1 warning generated.
+In file included from D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/AudioMixerController.cpp:29:
+In file included from D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/AudioMixer.h:25:
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/AudioResamplerPublic.h:106:29: warning: self-comparison always evaluates to true [-Wtautological-compare]
+           pr2.mStretchMode == pr2.mStretchMode &&
+                            ^
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/AudioResamplerPublic.h:107:30: warning: self-comparison always evaluates to true [-Wtautological-compare]
+           pr2.mFallbackMode == pr2.mFallbackMode;
+                             ^
+2 warnings generated.
+In file included from D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/AudioMixer.cpp:28:
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/audio_utils/include/audio_utils/primitives.h:742:33: warning: implicit conversion from 'unsigned long' to 'float' changes value from 4294967295 to 4294967296 [-Wimplicit-const-int-float-conversion]
+    static const float limpos = 0xffffffffUL / (float)(1 << 28);
+                                ^~~~~~~~~~~~ ~
+In file included from D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/AudioMixer.cpp:31:
+In file included from D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/AudioMixer.h:25:
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/AudioResamplerPublic.h:106:29: warning: self-comparison always evaluates to true [-Wtautological-compare]
+           pr2.mStretchMode == pr2.mStretchMode &&
+                            ^
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/AudioResamplerPublic.h:107:30: warning: self-comparison always evaluates to true [-Wtautological-compare]
+           pr2.mFallbackMode == pr2.mFallbackMode;
+                             ^
+3 warnings generated.
+In file included from D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/audio_utils/format.c:21:
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/audio_utils/include/audio_utils/primitives.h:742:33: warning: implicit conversion from 'unsigned long' to 'float' changes value from 4294967295 to 4294967296 [-Wimplicit-const-int-float-conversion]
+    static const float limpos = 0xffffffffUL / (float)(1 << 28);
+                                ^~~~~~~~~~~~ ~
+1 warning generated.
+In file included from D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/audio_utils/primitives.c:18:
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/audio/android/../..\audio/android/audio_utils/include/audio_utils/primitives.h:742:33: warning: implicit conversion from 'unsigned long' to 'float' changes value from 4294967295 to 4294967296 [-Wimplicit-const-int-float-conversion]
+    static const float limpos = 0xffffffffUL / (float)(1 << 28);
+                                ^~~~~~~~~~~~ ~
+1 warning generated.
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/external/sources/tremolo/Tremolo/floor0.c:61:13: warning: shifting a negative signed value is undefined [-Wshift-negative-value]
+  if(a<(-140<<12)) return 0;
+        ~~~~^
+1 warning generated.
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/external/sources/pvmp3dec/src/pvmp3_alias_reduction.cpp:172:70: error: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Werror,-Wimplicit-const-int-float-conversion]
+    *used_freq_lines = fxp_mul32_Q32(*used_freq_lines << 16, (int32)(0x7FFFFFFF / (float)18 - 1.0f)) >> 15;
+                                                                     ^~~~~~~~~~ ~
+1 error generated.
+make: *** [C:/Users/QiYongHan/AppData/Local/Android/Sdk/ndk/24.0.8215888/build//../build/core/build-binary.mk:424: D:/cocostest/fish/build/jsb-link/frameworks/runtime-src/proj.android-studio/instantapp/build/intermediates/ndkBuild/debug/obj/local/armeabi-v7a/objs-debug/pvmp3dec/src/pvmp3_alias_reduction.o] Error 1
+make: *** Waiting for unfinished jobs....
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/cocos/editor-support/dragonbones/parser/JSONDataParser.cpp:498:13: warning: enumeration value 'Path' not handled in switch [-Wswitch]
+    switch (type)
+            ^~~~
+1 warning generated.

@@ -1,0 +1,7 @@
+Android NDK: WARNING: Unsupported source file extensions in D:\CocosDashboard\resources\.editors\Creator\2.4.7\resources\cocos2d-x/cocos/Android.mk for module cocos2dx_static    
+Android NDK:   ../external/sources/edtaa3func/edtaa3func.h renderer/memop/RecyclePool.hpp    
+[armeabi-v7a] Compile++ arm  : pvmp3dec <= pvmp3_alias_reduction.cpp
+[armeabi-v7a] Compile++ arm  : pvmp3dec <= pvmp3_mpeg2_get_scale_factors.cpp
+[armeabi-v7a] Compile++ arm  : pvmp3dec <= pvmp3_mpeg2_stereo_proc.cpp
+[armeabi-v7a] Compile++ arm  : pvmp3dec <= pvmp3_huffman_decoding.cpp
+[armeabi-v7a] Compile++ arm  : pvmp3dec <= pvmp3_huffman_parsing.cpp

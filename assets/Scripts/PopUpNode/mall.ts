@@ -1,3 +1,4 @@
+import { isPlayEnd } from "../Manager/ADManager";
 import AudioManager from "../Manager/AudioManager";
 import baseManager from "../Manager/baseManager";
 import GameData from "../Manager/GameData";
@@ -93,8 +94,7 @@ export default class mall extends baseManager {
             }
         }
         else if(cc.find('mianfeihuode',button).active){
-            if("广告播放成功"){
-                console.log("免费获取",value);
+            if(isPlayEnd()){
                 GameData.getInstance().local_data.guanghuan[parseInt(value)] = 1;
                 GameData.getInstance().local_data_set("guanghuan",GameData.getInstance().local_data.guanghuan);
                 this.init_ui();

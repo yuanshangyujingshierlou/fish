@@ -11,7 +11,7 @@
 			"services": [
 				{
 					"service_id": "235",
-					"enable": false,
+					"enable": true,
 					"params": {
 						"appid": "650157160",
 						"store_id": "",

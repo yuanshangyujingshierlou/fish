@@ -5,6 +5,7 @@ import GameData from "../Manager/GameData";
 import ViewMain from "../ViewMain";
 import {round} from "../game/upgrade_type";
 import AudioManager from "../Manager/AudioManager";
+import { isPlayEnd } from "../Manager/ADManager";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -32,7 +33,7 @@ export default class fail_page extends baseManager {
     click_restart(){
         AudioManager.getInstance().playSound("点击按钮音");
         if(GameData.ViewMain.gameType == "ziyou"){ // 自由模式 继续游戏 看广告
-            console.log("看了广告");
+            if(!isPlayEnd()) return;
             this.node.removeFromParent();
         }else if(GameData.ViewMain.gameType == "guanqia"){ // 关卡模式 重新开始 回到第一关
             this.node.removeFromParent();
@@ -48,7 +49,7 @@ export default class fail_page extends baseManager {
             GameData.free_type.gameOver();  // 游戏结束
             cc.director.loadScene("main");  // 重置场景
         }else if(GameData.ViewMain.gameType == "guanqia"){ // 关卡模式 继续游戏 本关重来 需要看广告
-            console.log("广告播放成功");
+            if(!isPlayEnd()) return;
             this.node.removeFromParent();
             GameData.upgrade_type.removeRound(GameData.upgrade_type.now_round);
         }

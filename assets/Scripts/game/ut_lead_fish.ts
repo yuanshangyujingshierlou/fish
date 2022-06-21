@@ -13,6 +13,7 @@ export default class ut_lead_fish extends cc.Component {
     frameParent:cc.Node = null; // 盒子父节点
     onLoad () {
         GameData.ut_lead_fish = this;
+        this.node.getChildByName("animation").getComponent(dragonBones.ArmatureDisplay).timeScale = 1.5;
         this.node.getChildByName("animation").getComponent(dragonBones.ArmatureDisplay).on(dragonBones.EventObject.COMPLETE,(e)=>{
             if(this.aniName == "shengli-1"){
                 this.aniName = "daiji-1";
@@ -38,7 +39,7 @@ export default class ut_lead_fish extends cc.Component {
         let ut = GameData.upgrade_type;
         ut.yanwu = cc.instantiate(ut.yanwuPfb);
         ut.yanwu.getComponent(dragonBones.ArmatureDisplay).once(dragonBones.EventObject.COMPLETE,this.fightEnd,this);
-        ut.yanwu.getComponent(dragonBones.ArmatureDisplay).timeScale = 1.5;
+        ut.yanwu.getComponent(dragonBones.ArmatureDisplay).timeScale = 2;
         ut.yanwu.getComponent(dragonBones.ArmatureDisplay).playAnimation("newAnimation",1);
         ut.yanwu.setParent(ut.node);
         ut.yanwu.setPosition(pos);

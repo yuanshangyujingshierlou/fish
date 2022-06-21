@@ -7,7 +7,7 @@ export default class upgrade_tpye_move extends cc.Component {
     nowPos = cc.v2(0,0);
     isClick_leadfish:boolean = false; // 有没有点击主角
     isMove:boolean = false;           // 主角是否正在移动 移动中无法被点击
-    speed:number = 400;               // 主角移动速度
+    speed:number = 650;               // 主角移动速度
     angle:number = null;              // 主角移动角度
     
     protected onLoad () {

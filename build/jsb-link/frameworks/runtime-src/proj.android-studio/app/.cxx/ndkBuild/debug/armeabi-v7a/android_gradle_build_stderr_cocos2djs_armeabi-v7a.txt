@@ -1,0 +1,6 @@
+D:/CocosDashboard/resources/.editors/Creator/2.4.7/resources/cocos2d-x/external/sources/pvmp3dec/src/pvmp3_alias_reduction.cpp:172:70: error: implicit conversion from 'int' to 'float' changes value from 2147483647 to 2147483648 [-Werror,-Wimplicit-const-int-float-conversion]
+    *used_freq_lines = fxp_mul32_Q32(*used_freq_lines << 16, (int32)(0x7FFFFFFF / (float)18 - 1.0f)) >> 15;
+                                                                     ^~~~~~~~~~ ~
+1 error generated.
+make: *** [C:/Users/QiYongHan/AppData/Local/Android/Sdk/ndk/24.0.8215888/build//../build/core/build-binary.mk:424: D:/cocostest/fish/build/jsb-link/frameworks/runtime-src/proj.android-studio/app/build/intermediates/ndkBuild/debug/obj/local/armeabi-v7a/objs-debug/pvmp3dec/src/pvmp3_alias_reduction.o] Error 1
+make: *** Waiting for unfinished jobs....

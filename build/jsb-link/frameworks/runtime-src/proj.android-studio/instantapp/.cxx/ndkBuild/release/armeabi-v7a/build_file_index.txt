@@ -1,0 +1,2 @@
+D:\cocostest\fish\build\jsb-link\frameworks\runtime-src\proj.android-studio\instantapp\jni\Android.mk
+D:\cocostest\fish\build\jsb-link\frameworks\runtime-src\proj.android-studio\instantapp\jni\Application.mk

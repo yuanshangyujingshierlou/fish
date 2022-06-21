@@ -92,7 +92,7 @@ export default class monsterFish_Component extends cc.Component {
     removeFish(){
         this.node.children.forEach(child => {
             let index = parseInt(child.name.slice(child.name.indexOf('_')+1,child.name.length)); //记录鱼的层级 不能回头
-            if(index < GameData.ut_lead_fish.fishIndex){
+            if(index <= GameData.ut_lead_fish.fishIndex){
                 cc.tween(child).by(0.5,{opacity:0,x:-300}).call(()=>{child.destroy();}).start();
             }
         })

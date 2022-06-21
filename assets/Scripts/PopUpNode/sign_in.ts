@@ -1,3 +1,4 @@
+import { isPlayEnd } from "../Manager/ADManager";
 import AudioManager from "../Manager/AudioManager";
 import baseManager from "../Manager/baseManager";
 import GameData from "../Manager/GameData";
@@ -36,6 +37,7 @@ export default class sign_in extends baseManager {
     click_double_reward(){
         AudioManager.getInstance().playSound("点击按钮音");
         // 播放广告双倍领取
+        if(!isPlayEnd()) return;
         if(!GameData.getInstance().local_data.reward_status){
             GameData.getInstance().local_data.jinbi += GameData.getInstance().sign_in_reward[GameData.getInstance().local_data.login_day % 7] * 2;
             GameData.getInstance().local_data_set("jinbi",GameData.getInstance().local_data.jinbi);
