@@ -1,4 +1,5 @@
 import GameData from "../Manager/GameData";
+import gameStart from "./gameStart";
 
 const {ccclass, property} = cc._decorator;
 
@@ -9,6 +10,9 @@ export default class upgrade_tpye_move extends cc.Component {
     isMove:boolean = false;           // 主角是否正在移动 移动中无法被点击
     speed:number = 650;               // 主角移动速度
     angle:number = null;              // 主角移动角度
+
+    @property(cc.Node)
+    touchColl:cc.Node = null; // 碰撞节点
     
     protected onLoad () {
         GameData.upgrade_tpye_move = this;
@@ -47,22 +51,28 @@ export default class upgrade_tpye_move extends cc.Component {
         this.drawLineOfDashes(g,this.nowPos,movePos);
         // 算出角度
         this.angle = this.getVectorRadians(this.nowPos.x,this.nowPos.y,movePos.x,movePos.y);
+        this.touchColl.setPosition(movePos);
+        
     }
-    // 触摸结束
+    // 触摸在节点中移开
     touch_End(event:cc.Event.EventTouch){
         this.isClick_leadfish = false;
         let round = GameData.check_node_name(GameData.upgrade_type.node,"round");
         let g = round.getChildByName('draw_line').getComponent(cc.Graphics);
         g.clear();
         this.nowPos = cc.v2(0,0);
+        GameData.monsterFish_Component.touchUp(GameData.monsterFish_Component.targetFish);
+        this.touchColl.setPosition(this.node.getPosition());
     }
-    // 触摸取消
+    // 触摸在节点外移开
     touch_Cancel(event:cc.Event.EventTouch){
         this.isClick_leadfish = false;
         let round = GameData.check_node_name(GameData.upgrade_type.node,"round");
         let g = round.getChildByName('draw_line').getComponent(cc.Graphics);
         g.clear(); 
         this.nowPos = cc.v2(0,0);
+        GameData.monsterFish_Component.touchUp(GameData.monsterFish_Component.targetFish);
+        this.touchColl.setPosition(this.node.getPosition());
     }
     // 绘制虚线
     drawLineOfDashes(g: cc.Graphics, from: cc.Vec2, to: cc.Vec2, stroke: boolean = true, length: number = 20, interval: number = 20): void {

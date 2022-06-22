@@ -22,9 +22,9 @@ export default class mapComponent extends cc.Component {
     onLoad () {
         GameData.mapComponent = this;
         this.node.children.forEach(child => {
-            child.on(cc.Node.EventType.MOUSE_ENTER, this.touchEnter, this);
-            child.on(cc.Node.EventType.MOUSE_LEAVE, this.touchLeave, this);
-            child.on(cc.Node.EventType.MOUSE_UP, this.touchUp, this);
+            // child.on(cc.Node.EventType.MOUSE_ENTER, this.touchEnter, this);
+            // child.on(cc.Node.EventType.MOUSE_LEAVE, this.touchLeave, this);
+            // child.on(cc.Node.EventType.MOUSE_UP, this.touchUp, this);
         });
     }
 
@@ -37,13 +37,11 @@ export default class mapComponent extends cc.Component {
     }
 
     // 触摸进入
-    touchEnter(event: cc.Event.EventTouch) {
+    touchEnter(node:cc.Node) {
         if(GameData.mapTypeLeadFishMove.isTouch){
             this.isTouchEnter = true; // 进入目标范围
-            // this.targetFramePos.leftTop = cc.v2(event.target.x - event.target.width/2, event.target.y + event.target.height/2); // 获取目标方块的左上角坐标
-            // this.targetFramePos.rightBottom = cc.v2(event.target.x + event.target.width/2, event.target.y - event.target.height/2); // 获取目标方块的右下角坐标
-            this.targetPointPos = cc.v2(event.target.getPosition().x + event.target.parent.x, event.target.getPosition().y + event.target.parent.y); // 获取目标点的坐标
-            event.target.children.forEach(child => { // 获取目标点的坐标
+            this.targetPointPos = cc.v2(node.getPosition().x + node.parent.x, node.getPosition().y + node.parent.y); // 获取目标点的坐标
+            node.children.forEach(child => { // 获取目标点的坐标
                 if(child.name.indexOf("monster") != -1 || child.name.indexOf("boss") != -1){
                     this.isHasMonster = true; // 目标方块内有怪物
                     this.targetFish = child; // 获取目标怪物
@@ -61,7 +59,7 @@ export default class mapComponent extends cc.Component {
     }
 
     // 触摸离开
-    touchLeave(event: cc.Event.EventTouch) {
+    touchLeave(node:cc.Node) {
         this.isTouchEnter = false; // 进入目标范围
         this.targetPointPos = null; // 清空坐标
     }

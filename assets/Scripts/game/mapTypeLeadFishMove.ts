@@ -11,6 +11,9 @@ export default class mapTypeLeadFishMove extends cc.Component {
     speed:number = 400;                // 主角移动速度
     angle:number = null;               // 主角移动角度
     lastPos:cc.Vec2;                   // 主角移动前的坐标
+
+    @property(cc.Node)
+    touchColl:cc.Node = null;
     
     protected onLoad () {
         GameData.mapTypeLeadFishMove = this;
@@ -38,6 +41,7 @@ export default class mapTypeLeadFishMove extends cc.Component {
     touch_Move(event:cc.Event.EventTouch){
         if(this.isTouch){
             this.node.setPosition(this.node.parent.convertToNodeSpaceAR(event.getLocation()).x + GameData.upgrade_type.cameraX,this.node.parent.convertToNodeSpaceAR(event.getLocation()).y + GameData.upgrade_type.cameraY);
+            this.touchColl.setPosition(this.node.getPosition());
         }
     }
     // 触摸结束
@@ -75,11 +79,13 @@ export default class mapTypeLeadFishMove extends cc.Component {
             }
         }else{
             this.node.setPosition(this.lastPos); // 返回到上一个位置
+            this.touchColl.setPosition(this.node.getPosition());
         }
     }
     // 触摸取消
     touch_Cancel(event:cc.Event.EventTouch){
         this.isTouch = false;
         this.node.setPosition(this.lastPos); // 返回到上一个位置
+        this.touchColl.setPosition(this.node.getPosition());
     }
 }
