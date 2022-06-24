@@ -35,8 +35,8 @@ export default class free_type extends cc.Component {
 
     onEnable(){
         // 每次进来重新刷一下经验值
-        this.upgrade_experience = 100 + Math.pow(GameData.getInstance().local_data.free_round,2) * 10;
-        this.now_exp = 100;
+        this.upgrade_experience = 100 + Math.pow(GameData.getInstance().local_data.free_round,2) * 10; //升级所需经验
+        this.now_exp = 0;
         this.random_bg();
         this.init();
         this.init_progressBar(GameData.leadFish.node.getComponent(dragonBones.ArmatureDisplay).dragonAsset.name);
@@ -139,8 +139,8 @@ export default class free_type extends cc.Component {
             GameData.getInstance().local_data_set("free_round",GameData.getInstance().local_data.free_round + 1);
             // 当前经验值清空重新计算
             this.now_exp = 0;
-            // 弹出升级宝箱
-            ViewManager.showView("treasure_chest");
+            // 播放升级动画
+            GameData.lead_fish_setAnimation(GameData.leadFish.node,"shengli-1",0);
         }else{
             this.progressbar.progress = num; //更新进度条进度
         }

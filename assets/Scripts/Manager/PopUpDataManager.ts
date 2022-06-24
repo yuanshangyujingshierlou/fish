@@ -21,10 +21,6 @@ export default class PopUpDataManager extends cc.Component {
     onChildRemoved(event) {
         if(!GameData.isPlay) return;
         this.resumeGame();
-        if(event.name == "treasure_chest"){
-            // 播放升级动画
-            GameData.lead_fish_setAnimation(GameData.leadFish.node,"shengli-1",0);
-        }
     }
 
     // 弹窗关闭 游戏继续

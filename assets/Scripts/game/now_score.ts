@@ -55,7 +55,7 @@ export default class NewClass extends cc.Component {
             this.node.scale = 1;
             if(GameData.upgrade_type.now_round == 3){ // 如果是第三关
                 if(GameData.mapComponent.targetFish.name.indexOf('boss') === -1){ // 如果不是boss
-                    if(GameData.mapComponent.target_index <=3){
+                    if(GameData.mapComponent.target_index <=2){
                         cc.tween(cc.find('Canvas/Main Camera'))
                         .call(()=>{
                             let posX = this.node.parent.x - cc.find('Canvas/Main Camera').x; //计算出偏移量
