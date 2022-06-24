@@ -316,7 +316,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
+      "width": 2160,
       "height": 0
     },
     "_anchorPoint": {
@@ -672,10 +672,10 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 0,
+      "width": 2160,
       "height": 0
     },
-    "_resize": 0,
+    "_resize": 1,
     "_N$layoutType": 1,
     "_N$cellSize": {
       "__type__": "cc.Size",

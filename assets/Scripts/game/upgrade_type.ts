@@ -58,7 +58,7 @@ export default class upgrade_type extends cc.Component {
         // 横屏连续
         let road_num = this.distanceX;
         let camera = cc.find("Canvas/Main Camera");
-        if(road_num >= camera.width / 2){ // 如果摄像机偏移超过一半.3
+        if(road_num >= camera.width / 3 * 2){ // 如果摄像机偏移超过一半.3
             if(GameData.ViewMain.bg.getComponent(cc.Layout)) GameData.ViewMain.bg.getComponent(cc.Layout).enabled = false;
             this.left.x = this.right.x + this.right.width; // 左边移动到右边的右边
             let right_spare = this.right;             // 存起来右边备用
@@ -66,7 +66,7 @@ export default class upgrade_type extends cc.Component {
             this.left = this.middle; // 左边替换为中间
             this.middle = right_spare; // 中间替换为右边
             this.distanceX = 0;
-        }else if(road_num <= -camera.width / 2){
+        }else if(road_num <= -camera.width / 3 * 2){
             this.right.x = this.left.x - this.left.width; // 右边移动到左边的左边
             let left_spare = this.left;            // 存起来左边备用
             this.left = this.right; // 左边替换为右边
@@ -110,6 +110,7 @@ export default class upgrade_type extends cc.Component {
     removeRound(num:round): void {  //移除关卡 并且重置到num关
         let round = GameData.check_node_name(GameData.upgrade_type.node,"round");
         round.removeFromParent(); //移除关卡
+        round.destroy();
         if(!num) return; //如果没有数字传入 就移除关卡结束
         if(num == 5) num = new treasure_chest().random_two(1,4);
         cc.find("Canvas/background").getComponent(cc.Layout).enabled = true;
@@ -118,6 +119,11 @@ export default class upgrade_type extends cc.Component {
             this.cameraX = 0; // 摄像机偏移清零
             this.cameraY = 0; // 摄像机偏移清零
             this.distanceX = 0; // 玩家距离摄像机偏移清零
+            this.nowCameraX = 0;  // 当前摄像机X坐标
+            this.lastCameraX = 0;  // 上次摄像机X坐标
+            this.left = cc.find("Canvas/background").children[0]; // 左边
+            this.middle = cc.find("Canvas/background").children[1]; // 中间
+            this.right = cc.find("Canvas/background").children[2]; // 右边
         }
         ).start();
     }

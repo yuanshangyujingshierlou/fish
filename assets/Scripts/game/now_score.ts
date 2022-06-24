@@ -34,6 +34,7 @@ export default class NewClass extends cc.Component {
                 .call(()=>{ 
                     let posX = this.node.parent.x - cc.find('Canvas/Main Camera').x; //计算出偏移量
                     GameData.upgrade_type.cameraX += (posX + GameData.screenSize.width/2 - this.node.parent.width / 2 - 30); //更新摄像机偏移量
+                    GameData.upgrade_type.background_move(); // 背景移动 
                     GameData.monsterFish_Component.targetFish = null; //清空目标鱼
                     GameData.monsterFish_Component.removeFish(); // 移除鱼
                     GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;

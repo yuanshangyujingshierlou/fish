@@ -71,9 +71,14 @@ export default class mapTypeLeadFishMove extends cc.Component {
                     .call(()=>{
                         let posX = this.node.x - cc.find('Canvas/Main Camera').x;
                         GameData.upgrade_type.cameraX += posX;
-                        GameData.upgrade_type.background_move(); // 背景移动
+                        GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;
                     })
                     .to(0.5,{x:this.node.x})
+                    .call(()=>{
+                        GameData.upgrade_type.nowCameraX = cc.find('Canvas/Main Camera').x;
+                        GameData.upgrade_type.distanceX += (GameData.upgrade_type.nowCameraX - GameData.upgrade_type.lastCameraX);
+                        GameData.upgrade_type.background_move(); // 背景移动
+                    })
                     .start();
                 }
             }
