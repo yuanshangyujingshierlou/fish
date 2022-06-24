@@ -33,22 +33,16 @@ export default class NewClass extends cc.Component {
                 cc.tween(cc.find('Canvas/Main Camera')) //摄像机
                 .call(()=>{ 
                     let posX = this.node.parent.x - cc.find('Canvas/Main Camera').x; //计算出偏移量
-                    GameData.upgrade_type.cameraX += posX; //更新摄像机偏移量
-                    GameData.upgrade_type.background_move(); // 背景移动 
+                    GameData.upgrade_type.cameraX += (posX + GameData.screenSize.width/2 - this.node.parent.width / 2 - 30); //更新摄像机偏移量
                     GameData.monsterFish_Component.targetFish = null; //清空目标鱼
                     GameData.monsterFish_Component.removeFish(); // 移除鱼
+                    GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;
                 })
-                .to(0.5,{x:this.node.parent.x}) //移动到目标位置
+                .to(0.5,{x:this.node.parent.x + GameData.screenSize.width/2 - this.node.parent.width / 2 - 30}) //移动到目标位置
                 .call(()=>{
-                    if(GameData.monsterFish_Component.target_index == 8 && GameData.upgrade_type.now_round == 2){ // 关卡模式第二关 最后boss太大了 需要调整位置
-                        if(GameData.monsterFish_Component.node.getChildByName("boss_9")){ // 如果有boss9
-                            let boss = GameData.monsterFish_Component.node.getChildByName("boss_9"); // 获取boss
-                            let posX = boss.x + boss.width/2 - cc.find('Canvas/Main Camera').width/2; // 计算出偏移量
-                            GameData.upgrade_type.cameraX += posX - GameData.upgrade_type.cameraX; //更新摄像机偏移量
-                            GameData.upgrade_type.background_move(); // 背景移动 
-                            cc.tween(cc.find('Canvas/Main Camera')).to(0.5,{x:posX}).start(); //移动到目标位置
-                        }
-                    }
+                    GameData.upgrade_type.nowCameraX = cc.find('Canvas/Main Camera').x;
+                    GameData.upgrade_type.distanceX += (GameData.upgrade_type.nowCameraX - GameData.upgrade_type.lastCameraX);
+                    GameData.upgrade_type.background_move(); // 背景移动 
                 })
                 .start();
             }else{
@@ -60,26 +54,37 @@ export default class NewClass extends cc.Component {
             this.node.scale = 1;
             if(GameData.upgrade_type.now_round == 3){ // 如果是第三关
                 if(GameData.mapComponent.targetFish.name.indexOf('boss') === -1){ // 如果不是boss
-                    cc.tween(cc.find('Canvas/Main Camera'))
-                    .call(()=>{
-                        let posX = this.node.parent.x - cc.find('Canvas/Main Camera').x; //计算出偏移量
-                        GameData.upgrade_type.cameraX += posX; //更新摄像机偏移量
-                        GameData.upgrade_type.background_move(); // 背景移动
-                        GameData.mapComponent.targetFish = null; //清空目标鱼
-                    })
-                    .to(0.5,{x:this.node.parent.x})
-                    .call(()=>{
-                        if(GameData.mapComponent.target_index == 11 && GameData.upgrade_type.now_round == 3){ // 关卡模式第三关 最后boss太大了 需要调整位置
-                            if(GameData.mapComponent.node.getChildByName("block12")&&GameData.mapComponent.node.getChildByName("block12").getChildByName("boss")){ // 如果有boss
-                                let boss = GameData.mapComponent.node.getChildByName("block12"); // 获取boss
-                                let posX = boss.x + boss.width/2 - cc.find('Canvas/Main Camera').width/2; // 计算出偏移量
-                                GameData.upgrade_type.cameraX += posX - GameData.upgrade_type.cameraX; //更新摄像机偏移量
-                                GameData.upgrade_type.background_move(); // 背景移动
-                                cc.tween(cc.find('Canvas/Main Camera')).to(0.5,{x:posX}).start(); //移动到目标位置
-                            }
-                        }
-                    })
-                    .start();
+                    if(GameData.mapComponent.target_index <=3){
+                        cc.tween(cc.find('Canvas/Main Camera'))
+                        .call(()=>{
+                            let posX = this.node.parent.x - cc.find('Canvas/Main Camera').x; //计算出偏移量
+                            GameData.upgrade_type.cameraX += (posX); //更新摄像机偏移量
+                            GameData.mapComponent.targetFish = null; //清空目标鱼
+                            GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;
+                        })
+                        .to(0.5,{x:this.node.parent.x})
+                        .call(()=>{
+                            GameData.upgrade_type.nowCameraX = cc.find('Canvas/Main Camera').x;
+                            GameData.upgrade_type.distanceX += (GameData.upgrade_type.nowCameraX - GameData.upgrade_type.lastCameraX);
+                            GameData.upgrade_type.background_move(); // 背景移动 
+                        })
+                        .start();
+                    }else{
+                        cc.tween(cc.find('Canvas/Main Camera'))
+                        .call(()=>{
+                            let posX = this.node.parent.x - cc.find('Canvas/Main Camera').x; //计算出偏移量
+                            GameData.upgrade_type.cameraX += (posX + GameData.screenSize.width/2 - this.node.parent.width / 2 - 30); //更新摄像机偏移量
+                            GameData.mapComponent.targetFish = null; //清空目标鱼
+                            GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;
+                        })
+                        .to(0.5,{x:this.node.parent.x + GameData.screenSize.width/2 - this.node.parent.width / 2 - 30})
+                        .call(()=>{
+                            GameData.upgrade_type.nowCameraX = cc.find('Canvas/Main Camera').x;
+                            GameData.upgrade_type.distanceX += (GameData.upgrade_type.nowCameraX - GameData.upgrade_type.lastCameraX);
+                            GameData.upgrade_type.background_move(); // 背景移动 
+                        })
+                        .start();
+                    }
                 }else{ // 如果是boss鱼 结束游戏
     
                 }

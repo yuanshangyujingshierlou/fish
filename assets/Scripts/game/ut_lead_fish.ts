@@ -180,12 +180,17 @@ export default class ut_lead_fish extends cc.Component {
                 cc.tween(cc.find('Canvas/Main Camera'))
                 .call(()=>{
                     let posX = this.node.x - cc.find('Canvas/Main Camera').x
-                    GameData.upgrade_type.cameraX += posX; // 更新摄像机位置
+                    GameData.upgrade_type.cameraX += (posX + GameData.screenSize.width/2 - this.node.width / 2 - 30); // 更新摄像机位置
                     GameData.upgrade_type.background_move(); // 背景移动
                     monsterCompoent.targetFish = null;
                     monsterCompoent.removeFish();
+                    GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;
                 })
-                .to(0.5,{x:this.node.x})
+                .to(0.5,{x:this.node.x + GameData.screenSize.width / 2 - this.node.width / 2 - 30})
+                .call(()=>{
+                    GameData.upgrade_type.nowCameraX = cc.find('Canvas/Main Camera').x;
+                    GameData.upgrade_type.distanceX += (GameData.upgrade_type.nowCameraX - GameData.upgrade_type.lastCameraX);
+                })
                 .start();
             }else{
                 monsterCompoent.targetFish = null;

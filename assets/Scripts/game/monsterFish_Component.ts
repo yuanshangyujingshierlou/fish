@@ -47,7 +47,6 @@ export default class monsterFish_Component extends cc.Component {
     // 触摸抬起
     // touchUp(event:cc.Event.EventTouch){
     touchUp(node:cc.Node){
-        console.log(this.isTouchEnter)
         if(this.isTouchEnter && this.target_index >= GameData.ut_lead_fish.fishIndex){ // 如果进入目标范围并且目标层级大于等于鱼的层级
             this.isTouchEnter = false; // 移动中无法再次移动
             GameData.upgrade_tpye_move.isMove = true; //打开移动锁 限制再次点击

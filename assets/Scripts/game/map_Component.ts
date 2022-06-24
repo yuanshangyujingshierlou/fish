@@ -46,7 +46,7 @@ export default class mapComponent extends cc.Component {
                     this.isHasMonster = true; // 目标方块内有怪物
                     this.targetFish = child; // 获取目标怪物
                     this.target_score = parseInt(child.getChildByName("label").getComponent(cc.Label).string);           // 记录目标鱼的分数
-                    this.target_index = parseInt(child.name.slice(child.name.indexOf('_')+1,child.name.length)); // 记录鱼的层级 不能回头
+                    this.target_index = parseInt(child.parent.name.slice(child.parent.name.indexOf('k')+1,child.name.length)); // 记录鱼的层级 不能回头
                 }else{
                     this.isHasMonster = false; // 目标方块内没有怪物
                     if(child.name.indexOf("x") != -1){
@@ -76,7 +76,6 @@ export default class mapComponent extends cc.Component {
     addFrame(node:cc.Node){
         if(!node) return;
         if(GameData.mapComponent.targetPointPos){ // 如果目标点存在
-            console.log(GameData.mapComponent.targetFish.name)
             if(this.frameNum <= 4){ // 如果目标方块数量小于4
                 GameData.mapComponent.targetPointPos = node.getPosition().y < GameData.mapComponent.targetPointPos.y ?cc.v2(node.getPosition()): GameData.mapComponent.targetPointPos; // 获取目标点的坐标
             }else{
@@ -105,7 +104,6 @@ export default class mapComponent extends cc.Component {
             this.node.width = 500;
             this.node.height = 450+368;
             this.node.getComponent(cc.Layout).paddingBottom = 0;
-            console.log(this.node.width,this.node.height);
             this.node.children.forEach(child => {
                 child.setPosition(0,0);
             })

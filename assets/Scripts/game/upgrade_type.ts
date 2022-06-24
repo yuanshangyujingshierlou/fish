@@ -29,15 +29,25 @@ export default class upgrade_type extends cc.Component {
     @property(cc.Prefab)
     roundList:Array<cc.Prefab> = []; //关卡预制点
 
-    distanceX: number = 0;  // 当前摄像机距上一次移动的距离
+    
+    nowCameraX: number = 0;  // 当前摄像机X坐标
+    lastCameraX: number = 0;  // 上次摄像机X坐标
+    distanceX:number = 0;
     now_round:round = null; // 当前关卡
     round_label:number = 1; // 关卡数展示
+
+    left:cc.Node;
+    middle:cc.Node;
+    right:cc.Node;
     onLoad () {
         GameData.upgrade_type = this;
         this.now_round  = round.first_round;
     }
 
     start () {
+        this.left = cc.find("Canvas/background").children[0]; // 左边
+        this.middle = cc.find("Canvas/background").children[1]; // 中间
+        this.right = cc.find("Canvas/background").children[2]; // 右边
     }
 
     update (dt) {
@@ -46,28 +56,24 @@ export default class upgrade_type extends cc.Component {
     // 背景二方连续
     public background_move(): void {
         // 横屏连续
-        let road_num = this.cameraX - this.distanceX;
+        let road_num = this.distanceX;
         let camera = cc.find("Canvas/Main Camera");
-        let left = cc.find("Canvas/background").children[0]; // 左边
-        let middle = cc.find("Canvas/background").children[1]; // 中间
-        let right = cc.find("Canvas/background").children[2]; // 右边
-        if(road_num >= camera.width / 2){ // 如果摄像机偏移超过一半
+        if(road_num >= camera.width / 2){ // 如果摄像机偏移超过一半.3
             if(GameData.ViewMain.bg.getComponent(cc.Layout)) GameData.ViewMain.bg.getComponent(cc.Layout).enabled = false;
-            left.x = right.x + right.width; // 左边移动到右边的右边
-            let right_spare = right;             // 存起来右边备用
-            right = left; // 右边替换为左边
-            left = middle; // 左边替换为中间
-            middle = right_spare; // 中间替换为右边
-            this.distanceX = this.cameraX;  // 玩家距离摄像机偏移多少记录，防止每次只移动一点，导致背景没能正确连续
+            this.left.x = this.right.x + this.right.width; // 左边移动到右边的右边
+            let right_spare = this.right;             // 存起来右边备用
+            this.right = this.left; // 右边替换为左边
+            this.left = this.middle; // 左边替换为中间
+            this.middle = right_spare; // 中间替换为右边
+            this.distanceX = 0;
         }else if(road_num <= -camera.width / 2){
-            right.x = left.x - left.width; // 右边移动到左边的左边
-            let left_spare = left;            // 存起来左边备用
-            left = right; // 左边替换为右边
-            right = middle; // 右边替换为中间
-            middle = left_spare; // 中间替换为左边
-            this.distanceX = this.cameraX;  
+            this.right.x = this.left.x - this.left.width; // 右边移动到左边的左边
+            let left_spare = this.left;            // 存起来左边备用
+            this.left = this.right; // 左边替换为右边
+            this.right = this.middle; // 右边替换为中间
+            this.middle = left_spare; // 中间替换为左边
+            this.distanceX = 0;
         }
-
     }
 
 

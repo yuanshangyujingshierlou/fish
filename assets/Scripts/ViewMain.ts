@@ -97,7 +97,6 @@ export default class ViewMain extends cc.Component {
         bg.width = GameData.screenSize.width * 3;
         bg.children.forEach(child => {
             child.width = GameData.screenSize.width;
-            console.log(child.width)
         });
     }
 

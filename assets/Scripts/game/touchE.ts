@@ -50,7 +50,13 @@ export default class touchE extends cc.Component {
         }
     }
     onCollisionStay(other,self){
-        let that = GameData.mapComponent;
-        that.touchEnter(other.node);
+        let that;
+        if(GameData.upgrade_type.now_round <= 2){
+            that = GameData.monsterFish_Component;
+            that.touchEnter(other.node);
+        }else{
+            that = GameData.mapComponent;
+            that.touchEnter(other.node);
+        }
     }
 }
