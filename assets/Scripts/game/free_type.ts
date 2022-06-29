@@ -48,9 +48,13 @@ export default class free_type extends cc.Component {
     }
 
     start () {
+
     }
 
     update (dt) {
+        if(cc.find("ui",this.node).x != cc.find("Canvas/Main Camera").x){
+            cc.find("ui",this.node).x = cc.find("Canvas/Main Camera").x
+        }
     }
 
     // 游戏金币数量同步
@@ -80,6 +84,8 @@ export default class free_type extends cc.Component {
                 }
             })
         }
+        cc.find("fish_touch_content",this.node).width = GameData.screenSize.width * 3;
+        cc.find("fish_touch_content",this.node).height = GameData.screenSize.height;
     }
 
     // 初始化自由模式等级进度条
@@ -140,65 +146,65 @@ export default class free_type extends cc.Component {
             // 当前经验值清空重新计算
             this.now_exp = 0;
             // 播放升级动画
-            GameData.lead_fish_setAnimation(GameData.leadFish.node,"shengli-1",0);
+            GameData.lead_fish_setAnimation(GameData.leadFish.node,"shengli-1",1);
         }else{
             this.progressbar.progress = num; //更新进度条进度
         }
     }
     // 主角升级
     upgrade_lead_fish(){
-            // 播放升级音效
-            AudioManager.getInstance().playSound("吃鱼升级");
-            // 移除鱼 换成下一级别的鱼
-            let qname = GameData.leadFish.node.getComponent(dragonBones.ArmatureDisplay).dragonAsset.name.match(/\w/g).join("");
-            let num = qname.match(/[1-9]/)
-            if(parseInt(num[0]) < 8){
-                let str1 = qname.slice(0,num.index)
-                let str2 = qname.slice(num.index+1)
-                let next_icon_name = str1 + (parseInt(num[0]) + 1) + str2;
-    
-                let pfb = cc.find("Canvas").getComponent(ViewMain).fish_list;
-                let fishNode = cc.instantiate(pfb.data.getChildByName(next_icon_name));
-                fishNode.name = "leadfish";
-                fishNode.addComponent(leadFish);
-                fishNode.group = "lead";
-                fishNode.scale = 1;
-                fishNode.getChildByName("label").getComponent(cc.Label).string = `LV.${GameData.getInstance().local_data.free_round}`
-                // 初始化光环
-                for(let i = 0; i < GameData.getInstance().local_data.guanghuan.length; i++){
-                    if(GameData.getInstance().local_data.guanghuan[i] === 2){
-                        console.log("光环",i);
-                        let guanghuan = cc.instantiate(cc.find("Canvas").getComponent(ViewMain).guanghuan_list.data.getChildByName(`guanghuan-${i+1}_ske`));
-                        // 带上光环
-                        guanghuan.name = 'guanghuan';
-                        guanghuan.setParent(fishNode);
-                        // 设置光环坐标 不挡住鱼
-                        guanghuan.setPosition(cc.v2(fishNode.getChildByName("label").x,fishNode.getChildByName("label").y - 10));
-                        fishNode.getChildByName("label").setPosition(cc.v2(fishNode.getChildByName("label").x,i > 2 ? fishNode.getChildByName("label").y + 50 : fishNode.getChildByName("label").y + 30));
-                        break;
-                    }
+        // 播放升级音效
+        AudioManager.getInstance().playSound("吃鱼升级");
+        // 移除鱼 换成下一级别的鱼
+        let qname = GameData.leadFish.node.getComponent(dragonBones.ArmatureDisplay).dragonAsset.name.match(/\w/g).join("");
+        let num = qname.match(/[1-9]/)
+        if(parseInt(num[0]) < 8){
+            let str1 = qname.slice(0,num.index)
+            let str2 = qname.slice(num.index+1)
+            let next_icon_name = str1 + (parseInt(num[0]) + 1) + str2;
+
+            let pfb = cc.find("Canvas").getComponent(ViewMain).fish_list;
+            let fishNode = cc.instantiate(pfb.data.getChildByName(next_icon_name));
+            fishNode.name = "leadfish";
+            fishNode.addComponent(leadFish);
+            fishNode.group = "lead";
+            fishNode.scale = 1;
+            fishNode.getChildByName("label").getComponent(cc.Label).string = `LV.${GameData.getInstance().local_data.free_round}`
+            // 初始化光环
+            for(let i = 0; i < GameData.getInstance().local_data.guanghuan.length; i++){
+                if(GameData.getInstance().local_data.guanghuan[i] === 2){
+                    console.log("光环",i);
+                    let guanghuan = cc.instantiate(cc.find("Canvas").getComponent(ViewMain).guanghuan_list.data.getChildByName(`guanghuan-${i+1}_ske`));
+                    // 带上光环
+                    guanghuan.name = 'guanghuan';
+                    guanghuan.setParent(fishNode);
+                    // 设置光环坐标 不挡住鱼
+                    guanghuan.setPosition(cc.v2(fishNode.getChildByName("label").x,fishNode.getChildByName("label").y - 10));
+                    fishNode.getChildByName("label").setPosition(cc.v2(fishNode.getChildByName("label").x,i > 2 ? fishNode.getChildByName("label").y + 50 : fishNode.getChildByName("label").y + 30));
+                    break;
                 }
-                fishNode.active = false;
-                cc.resources.load(`Texture/fnt/putong-wangjiadengji`,cc.BitmapFont,(err:Error,font:cc.BitmapFont)=>{
-                    if(err){
-                        console.log(err);
-                    }else{
-                        fishNode.getChildByName("label").getComponent(cc.Label).font = font;
-                    }
-                })
-                fishNode.setParent(cc.find("Canvas/ziyoumoshi/fish_touch_content"));
-                GameData.lead_fish.ani_name = next_icon_name;
-                GameData.lead_fish.isActivation = true;
-                fishNode.setPosition(GameData.leadFish.node.getPosition());
-                GameData.leadFish.node.removeFromParent();
-                GameData.leadFishMove.bindingFish();
-                fishNode.active = true;
-                GameData.lead_fish_setAnimation(GameData.leadFish.node,"qianyi-1",0);
-            }else{
-                GameData.leadFish.node.getChildByName("label").getComponent(cc.Label).string = `LV.${GameData.getInstance().local_data.free_round}`
             }
-            // 重新初始化进度条
-            this.init_progressBar(GameData.leadFish.node.getComponent(dragonBones.ArmatureDisplay).dragonAsset.name);
+            fishNode.active = false;
+            cc.resources.load(`Texture/fnt/putong-wangjiadengji`,cc.BitmapFont,(err:Error,font:cc.BitmapFont)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    fishNode.getChildByName("label").getComponent(cc.Label).font = font;
+                }
+            })
+            fishNode.setParent(cc.find("Canvas/ziyoumoshi/fish_touch_content"));
+            GameData.lead_fish.ani_name = next_icon_name;
+            GameData.lead_fish.isActivation = true;
+            fishNode.setPosition(GameData.leadFish.node.getPosition());
+            GameData.leadFish.node.removeFromParent();
+            GameData.leadFishMove.bindingFish();
+            fishNode.active = true;
+            GameData.lead_fish_setAnimation(GameData.leadFish.node,"qianyi-1",0);
+        }else{
+            GameData.leadFish.node.getChildByName("label").getComponent(cc.Label).string = `LV.${GameData.getInstance().local_data.free_round}`
+        }
+        // 重新初始化进度条
+        this.init_progressBar(GameData.leadFish.node.getComponent(dragonBones.ArmatureDisplay).dragonAsset.name);
     }
     // 加载npc鱼
     load_npc_fish(){

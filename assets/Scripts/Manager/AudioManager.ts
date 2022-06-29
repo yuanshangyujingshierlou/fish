@@ -37,12 +37,14 @@ export default class AudioManager {
     }
     //播放音乐
     playMusic(url:string){
-        var self = this;
+        if(this.bgMusicAudioID >= 0){
+            cc.audioEngine.stop(this.bgMusicAudioID);
+        }
         cc.resources.load(AudioManager.AUDIO_URL+url, cc.AudioClip, function (err, clip:cc.AudioClip) {
-            if(self.bgMusicAudioID >= 0){
-                cc.audioEngine.stop(self.bgMusicAudioID);
+            if(err) console.log(err)
+            else if(clip){
+                this.bgMusicAudioID = cc.audioEngine.play(clip,true,this.musicVolume);
             }
-            self.bgMusicAudioID = cc.audioEngine.play(clip,true,self.musicVolume);
         });
     }
     //播放音效
@@ -52,6 +54,9 @@ export default class AudioManager {
         cc.resources.load(AudioManager.AUDIO_URL+url, cc.AudioClip, function (err, clip:cc.AudioClip) {
             if(self.soundVolume > 0){
                 var audioId = cc.audioEngine.play(clip,false,self.soundVolume); 
+                cc.audioEngine.setFinishCallback(audioId,()=>{
+                    cc.audioEngine.stop(audioId);
+                })
             }
         });
     }

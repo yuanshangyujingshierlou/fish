@@ -67,19 +67,48 @@ export default class mapTypeLeadFishMove extends cc.Component {
                 }else{ // 如果没有道具
                     this.node.setPosition(GameData.mapComponent.targetPointPos.x ,GameData.mapComponent.targetPointPos.y); // 移动到目标点
                     if(GameData.upgrade_type.now_round == 4) return; // 如果是第四关 不用动摄像机
-                    cc.tween(cc.find('Canvas/Main Camera')) //移动相机对准主角
-                    .call(()=>{
-                        let posX = this.node.x - cc.find('Canvas/Main Camera').x;
-                        GameData.upgrade_type.cameraX += posX;
-                        GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;
-                    })
-                    .to(0.5,{x:this.node.x})
-                    .call(()=>{
-                        GameData.upgrade_type.nowCameraX = cc.find('Canvas/Main Camera').x;
-                        GameData.upgrade_type.distanceX += (GameData.upgrade_type.nowCameraX - GameData.upgrade_type.lastCameraX);
-                        GameData.upgrade_type.background_move(); // 背景移动
-                    })
-                    .start();
+                    // cc.tween(cc.find('Canvas/Main Camera')) //移动相机对准主角
+                    // .call(()=>{
+                    //     let posX = this.node.x - cc.find('Canvas/Main Camera').x;
+                    //     GameData.upgrade_type.cameraX += posX;
+                    //     GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;
+                    // })
+                    // .to(0.5,{x:this.node.x})
+                    // .call(()=>{
+                    //     GameData.upgrade_type.nowCameraX = cc.find('Canvas/Main Camera').x;
+                    //     GameData.upgrade_type.distanceX += (GameData.upgrade_type.nowCameraX - GameData.upgrade_type.lastCameraX);
+                    //     GameData.upgrade_type.background_move(); // 背景移动
+                    // })
+                    // .start();
+                    if(GameData.mapComponent.target_index <=2){
+                        cc.tween(cc.find('Canvas/Main Camera'))
+                        .call(()=>{
+                            let posX = this.node.x - cc.find('Canvas/Main Camera').x; //计算出偏移量
+                            GameData.upgrade_type.cameraX += (posX); //更新摄像机偏移量
+                            GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;
+                        })
+                        .to(0.5,{x:this.node.x})
+                        .call(()=>{
+                            GameData.upgrade_type.nowCameraX = cc.find('Canvas/Main Camera').x;
+                            GameData.upgrade_type.distanceX += (GameData.upgrade_type.nowCameraX - GameData.upgrade_type.lastCameraX);
+                            GameData.upgrade_type.background_move(); // 背景移动 
+                        })
+                        .start();
+                    }else{
+                        cc.tween(cc.find('Canvas/Main Camera'))
+                        .call(()=>{
+                            let posX = this.node.x - cc.find('Canvas/Main Camera').x; //计算出偏移量
+                            GameData.upgrade_type.cameraX += (posX + GameData.screenSize.width/2 - this.node.width / 2 - 30); //更新摄像机偏移量
+                            GameData.upgrade_type.lastCameraX = cc.find('Canvas/Main Camera').x;
+                        })
+                        .to(0.5,{x:this.node.x + GameData.screenSize.width/2 - this.node.width / 2 - 30})
+                        .call(()=>{
+                            GameData.upgrade_type.nowCameraX = cc.find('Canvas/Main Camera').x;
+                            GameData.upgrade_type.distanceX += (GameData.upgrade_type.nowCameraX - GameData.upgrade_type.lastCameraX);
+                            GameData.upgrade_type.background_move(); // 背景移动 
+                        })
+                        .start();
+                    }
                 }
             }
         }else{

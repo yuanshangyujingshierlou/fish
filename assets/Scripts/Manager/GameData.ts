@@ -179,8 +179,10 @@ export default class GameData{
         }
         if(ani_name != "qianyi-1"){
             if(ani_name == "chi-1") node.getComponent(dragonBones.ArmatureDisplay).timeScale = 2.5;
-            node.getComponent(dragonBones.ArmatureDisplay).on(dragonBones.EventObject.LOOP_COMPLETE,()=>{
-                if(ani_name == "shengli-1"){GameData.free_type.upgrade_lead_fish();}
+            node.getComponent(dragonBones.ArmatureDisplay).once(dragonBones.EventObject.LOOP_COMPLETE,()=>{
+                if(ani_name == "shengli-1"){
+                    GameData.free_type.upgrade_lead_fish();
+                }
                 node.getComponent(dragonBones.ArmatureDisplay).timeScale = 1;
                 node.getComponent(dragonBones.ArmatureDisplay).playAnimation("qianyi-1",0);
             })

@@ -28,7 +28,7 @@ export default class leadFishMove extends cc.Component {
     }
     update (dt) {
         // 触摸移动 移动范围太小不检测 免得晃动
-        if(GameData.dir.mag() < 0.5){
+        if(GameData.dir.mag() < 0.5 || isNaN(GameData.dir.x)|| isNaN(GameData.dir.y)){
             return;
         }
         if(this.lead_fish){
@@ -37,37 +37,25 @@ export default class leadFishMove extends cc.Component {
             let sx = vx * dt;
             let sy = vy * dt;
             // 鱼不能越界
-            if(this.lead_fish.x >= GameData.screenSize.width / 2 * 3 - this.lead_fish.width / 2){
+            if(this.lead_fish.x >= GameData.screenSize.width / 2 * 3 - this.lead_fish.width / 2 - 50){
                 this.lead_fish.x = this.lead_fish.x - 2;
-            }else if(this.lead_fish.x < -(GameData.screenSize.width / 2) * 3 + this.lead_fish.width / 2){
+            }else if(this.lead_fish.x < -(GameData.screenSize.width / 2) * 3 + this.lead_fish.width / 2 + 50){
                 this.lead_fish.x = this.lead_fish.x + 2;
-            }else if(this.lead_fish.y <= -(GameData.screenSize.height / 2) + this.lead_fish.height / 2){
+            }else if(this.lead_fish.y <= -(GameData.screenSize.height / 2) + this.lead_fish.height / 2 + 50){
                 this.lead_fish.y = this.lead_fish.y + 2;
-            }else if(this.lead_fish.y >= GameData.screenSize.height / 2 - this.lead_fish.height / 2){
+            }else if(this.lead_fish.y >= GameData.screenSize.height / 2 - this.lead_fish.height / 2 - 50){
                 this.lead_fish.y = this.lead_fish.y - 2;
             }else{
                 // 控制鱼移动
                 this.lead_fish.x += sx;
                 this.lead_fish.y += sy;
-                //=======================绘制路径
-                // this.line_interval.x += Math.abs(sx);
-                // this.line_interval.y += Math.abs(sy);
-                // if(this.line_interval.x <= 30 && this.line_interval.y <= 30){
-                //     GameData.free_type.node.getChildByName("draw_line").getComponent(cc.Graphics).moveTo(this.lead_fish.x,this.lead_fish.y);
-                //     GameData.free_type.node.getChildByName("draw_line").getComponent(cc.Graphics).lineTo(this.lead_fish.x + sx,this.lead_fish.y + sy);
-                //     GameData.free_type.node.getChildByName("draw_line").getComponent(cc.Graphics).stroke();
-                // }else if(this.line_interval.x >= 60 || this.line_interval.y >= 60){
-                //     console.log("清空")
-                //     this.line_interval.x = 0;
-                //     this.line_interval.y = 0;
-                // }   
             }
 
              // 相机设置边界
-            if(this.lead_fish.x > GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2 
+            if(this.lead_fish.x > GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2
                 || this.lead_fish.x < -(GameData.screenSize.width / 2) * 3  + cc.find("Canvas/Main Camera").width / 2){
-                cc.find("Canvas/Main Camera").x = cc.find("Canvas/Main Camera").x > 0 ? GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2
-                                                                                        :-(GameData.screenSize.width / 2) * 3 + cc.find("Canvas/Main Camera").width / 2;
+                cc.find("Canvas/Main Camera").x = cc.find("Canvas/Main Camera").x > 0 ? GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2 - 50
+                                                                                        :-(GameData.screenSize.width / 2) * 3 + cc.find("Canvas/Main Camera").width / 2 + 50;
             }else{
                 cc.find("Canvas/Main Camera").x += sx;
                 cc.find("ui",this.node.parent).x +=sx;
@@ -117,7 +105,6 @@ export default class leadFishMove extends cc.Component {
 
         let len_cos = this.lastPos.x > this.nowPos.x ? -len_cos_mag : len_cos_mag;
         let len_sin = this.lastPos.y > this.nowPos.y ? -len_sin_mag : len_sin_mag;
-
         GameData.dir.x = len_cos / len_xie;
         GameData.dir.y = len_sin / len_xie;
     }
