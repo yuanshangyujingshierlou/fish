@@ -1,7 +1,8 @@
 {
 	"game": {
-		"name": "未知游戏",
-		"appid": "UNKNOW"
+		"name": "fish_20220629132635",
+		"appid": "664803958",
+		"cid": 0
 	},
 	"needExecNative": true,
 	"configs": [
@@ -22,6 +23,15 @@
 		},
 		{
 			"appid": "UNKNOW"
+		},
+		{
+			"appid": "664803958",
+			"services": [
+				{
+					"service_id": "235",
+					"enable": true
+				}
+			]
 		}
 	]
 }

@@ -37,12 +37,12 @@ export default class AudioManager {
     }
     //播放音乐
     playMusic(url:string){
-        if(this.bgMusicAudioID >= 0){
-            cc.audioEngine.stop(this.bgMusicAudioID);
-        }
         cc.resources.load(AudioManager.AUDIO_URL+url, cc.AudioClip, function (err, clip:cc.AudioClip) {
             if(err) console.log(err)
             else if(clip){
+                if(this.bgMusicAudioID >= 0){
+                    cc.audioEngine.stop(this.bgMusicAudioID);
+                }
                 this.bgMusicAudioID = cc.audioEngine.play(clip,true,this.musicVolume);
             }
         });

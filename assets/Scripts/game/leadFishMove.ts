@@ -54,8 +54,8 @@ export default class leadFishMove extends cc.Component {
              // 相机设置边界
             if(this.lead_fish.x > GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2
                 || this.lead_fish.x < -(GameData.screenSize.width / 2) * 3  + cc.find("Canvas/Main Camera").width / 2){
-                cc.find("Canvas/Main Camera").x = cc.find("Canvas/Main Camera").x > 0 ? GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2 - 50
-                                                                                        :-(GameData.screenSize.width / 2) * 3 + cc.find("Canvas/Main Camera").width / 2 + 50;
+                cc.find("Canvas/Main Camera").x = cc.find("Canvas/Main Camera").x > 0 ? GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2
+                                                                                        :-(GameData.screenSize.width / 2) * 3 + cc.find("Canvas/Main Camera").width / 2;
             }else{
                 cc.find("Canvas/Main Camera").x += sx;
                 cc.find("ui",this.node.parent).x +=sx;
