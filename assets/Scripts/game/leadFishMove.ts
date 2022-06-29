@@ -37,13 +37,13 @@ export default class leadFishMove extends cc.Component {
             let sx = vx * dt;
             let sy = vy * dt;
             // 鱼不能越界
-            if(this.lead_fish.x >= GameData.screenSize.width / 2 * 3 - this.lead_fish.width / 2 - 50){
+            if(this.lead_fish.x >= GameData.screenSize.width / 2 * 3 - this.lead_fish.width / 2){
                 this.lead_fish.x = this.lead_fish.x - 2;
-            }else if(this.lead_fish.x < -(GameData.screenSize.width / 2) * 3 + this.lead_fish.width / 2 + 50){
+            }else if(this.lead_fish.x < -(GameData.screenSize.width / 2) * 3 + this.lead_fish.width / 2){
                 this.lead_fish.x = this.lead_fish.x + 2;
-            }else if(this.lead_fish.y <= -(GameData.screenSize.height / 2) + this.lead_fish.height / 2 + 50){
+            }else if(this.lead_fish.y <= -(GameData.screenSize.height / 2) + this.lead_fish.height / 2){
                 this.lead_fish.y = this.lead_fish.y + 2;
-            }else if(this.lead_fish.y >= GameData.screenSize.height / 2 - this.lead_fish.height / 2 - 50){
+            }else if(this.lead_fish.y >= GameData.screenSize.height / 2 - this.lead_fish.height / 2){
                 this.lead_fish.y = this.lead_fish.y - 2;
             }else{
                 // 控制鱼移动
@@ -52,8 +52,8 @@ export default class leadFishMove extends cc.Component {
             }
 
              // 相机设置边界
-            if(this.lead_fish.x > GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2
-                || this.lead_fish.x < -(GameData.screenSize.width / 2) * 3  + cc.find("Canvas/Main Camera").width / 2){
+            if(this.lead_fish.x > GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2 - 5
+                || this.lead_fish.x < -(GameData.screenSize.width / 2) * 3  + cc.find("Canvas/Main Camera").width / 2 + 5){
                 cc.find("Canvas/Main Camera").x = cc.find("Canvas/Main Camera").x > 0 ? GameData.screenSize.width / 2 * 3 - cc.find("Canvas/Main Camera").width / 2
                                                                                         :-(GameData.screenSize.width / 2) * 3 + cc.find("Canvas/Main Camera").width / 2;
             }else{
