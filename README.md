@@ -1,3 +1,1 @@
-# fish
-fishdemo
-http://www.qiyonghan.icu/build/index.html web包展示链接
+[大鱼吃小鱼](https://gamedemo.qiyonghan.icu/fish)
